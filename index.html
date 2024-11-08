@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curve Fitting and Area Calculation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        .error {
+            color: red;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+        input[type="file"] {
+            padding: 10px;
+            margin-top: 20px;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        img {
+            margin-top: 30px;
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Curve Fitting and Area Calculation</h1>
+        
+        <form method="POST" enctype="multipart/form-data">
+            <label for="curve_image">Upload Image with Curve:</label><br>
+            <input type="file" name="curve_image" id="curve_image" required><br>
+            <input type="submit" value="Upload Image">
+        </form>
+
+        {% if error %}
+            <div class="error">{{ error }}</div>
+        {% endif %}
+        
+        {% if equation %}
+            <div class="result">
+                <h2>Equation of the Curve:</h2>
+                <p>{{ equation }}</p>
+            </div>
+        {% endif %}
+        
+        {% if area %}
+            <div class="result">
+                <h2>Area Under the Curve:</h2>
+                <p>{{ area }} square units</p>
+            </div>
+        {% endif %}
+        
+        {% if plot_url %}
+            <div class="result">
+                <h2>Generated Plot:</h2>
+                <img src="{{ url_for('static', filename='plot.png') }}" alt="Plot Image">
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
